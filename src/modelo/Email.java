@@ -5,27 +5,23 @@
  */
 package modelo;
 
+import enumerated.Host;
+
 /**
  *
  * @author Marcelo
  */
 public class Email {
-    
+
     private String emailRemetente;
     private String senhaRemetente;
     private String emailDestinatario;
     private String assunto;
     private String menssagem;
+    private Host host;
 
-    public Email() {
-    }
-    
-    public Email(String emailRemetente, String senhaRemetente, String emailDestinatario, String assunto, String menssagem) {
-        this.emailRemetente = emailRemetente;
-        this.senhaRemetente = senhaRemetente;
-        this.emailDestinatario = emailDestinatario;
-        this.assunto = assunto;
-        this.menssagem = menssagem;
+    public static EmailBuilder builder(){
+        return new EmailBuilder();
     }
 
     public String getEmailRemetente() {
@@ -68,4 +64,48 @@ public class Email {
         this.menssagem = menssagem;
     }
 
+    public Host getHost() {
+        return host;
+    }
+
+    public void setHost(Host host) {
+        this.host = host;
+    }
+
+    public static final class EmailBuilder {
+        private Email email=  new Email();
+
+        public EmailBuilder emailRemetente(String emailRemetente) {
+            email.setEmailRemetente(emailRemetente);
+            return this;
+        }
+
+        public EmailBuilder senhaRemetente(String senhaRemetente) {
+            email.setSenhaRemetente(senhaRemetente);
+            return this;
+        }
+
+        public EmailBuilder emailDestinatario(String emailDestinatario) {
+            email.setEmailDestinatario(emailDestinatario);
+            return this;
+        }
+
+        public EmailBuilder assunto(String assunto) {
+            email.setAssunto(assunto);
+            return this;
+        }
+
+        public EmailBuilder menssagem(String menssagem) {
+            email.setMenssagem(menssagem);
+            return this;
+        }
+
+        public EmailBuilder host(Host host) {
+            email.setHost(host);
+            return this;
+        }
+        public Email build() {
+            return email;
+        }
+    }
 }
